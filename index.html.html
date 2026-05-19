@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Ucapan</title>
+
+<style>
+body{
+  margin:0;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Segoe UI;
+  overflow:hidden;
+}
+
+.card{
+  background:white;
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  width:90%;
+  max-width:400px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1{color:#ff4b7d;}
+p{color:#444;}
+button{
+  padding:12px 25px;
+  border:none;
+  background:#ff4b7d;
+  color:white;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+#msg{display:none; margin-top:20px; color:#ff4b7d; font-size:20px;}
+
+img{
+  width:200px;
+  border-radius:15px;
+  margin-top:15px;
+}
+
+.heart{
+  position:fixed;
+  top:-10px;
+  color:red;
+  animation: fall linear infinite;
+}
+@keyframes fall{to{transform:translateY(100vh);}}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1 id="judul"></h1>
+  <p id="sub"></p>
+  <button onclick="showMsg()" id="btn"></button>
+  <div id="msg"></div>
+  <img id="foto" src="">
+</div>
+
+<audio id="musik" loop></audio>
+
+<script>
+
+/* ===========================
+   ⚙️ BAGIAN SETTING (EDIT DISINI)
+   =========================== */
+
+const DATA = {
+  namaTarget : "Aisyah 💖",
+  judul : "Hai Sayang",
+  subjudul : "Aku ada sesuatu buat kamu...",
+  tombol : "Klik disini",
+  pesan : "Aku sayang kamu ❤️",
+  
+  // link foto (upload foto ke google drive / imgur)
+  foto : "https://i.imgur.com/6VBx3io.png",
+  
+  // link musik mp3 (opsional)
+  musik : ""
+}
+
+/* ===========================
+   ❌ JANGAN DIUBAH DIBAWAH INI
+   =========================== */
+
+document.getElementById("judul").innerHTML = DATA.judul + " " + DATA.namaTarget;
+document.getElementById("sub").innerHTML = DATA.subjudul;
+document.getElementById("btn").innerHTML = DATA.tombol;
+document.getElementById("msg").innerHTML = DATA.pesan;
+document.getElementById("foto").src = DATA.foto;
+
+if(DATA.musik !== ""){
+  document.getElementById("musik").src = DATA.musik;
+}
+
+function showMsg(){
+  document.getElementById("msg").style.display="block";
+  document.getElementById("musik").play();
+}
+
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="❤";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*3+2)+"s";
+  heart.style.fontSize=(Math.random()*20+10)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+}
+setInterval(createHeart,300);
+
+</script>
+</body>
+</html>
